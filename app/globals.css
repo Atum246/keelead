@@ -1,0 +1,79 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+    font-feature-settings: "rlig" 1, "calt" 1;
+  }
+}
+
+@layer utilities {
+  .gradient-text {
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-blue-500 to-emerald-500;
+  }
+  .gradient-border {
+    @apply relative before:absolute before:inset-0 before:rounded-lg before:p-[1px] before:bg-gradient-to-r before:from-blue-500 before:to-emerald-500 before:-z-10;
+  }
+  .glow-blue {
+    box-shadow: 0 0 20px rgba(59, 130, 246, 0.3);
+  }
+  .glow-emerald {
+    box-shadow: 0 0 20px rgba(16, 185, 129, 0.3);
+  }
+  .glass {
+    @apply bg-white/5 backdrop-blur-xl border border-white/10;
+  }
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: #333;
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
+/* Typing animation */
+@keyframes typing {
+  0%, 60%, 100% { opacity: 0; }
+  30% { opacity: 1; }
+}
+.typing-dot {
+  animation: typing 1.4s infinite;
+}
+.typing-dot:nth-child(2) { animation-delay: 0.2s; }
+.typing-dot:nth-child(3) { animation-delay: 0.4s; }
+
+/* Markdown styles */
+.markdown-body {
+  @apply text-sm leading-relaxed;
+}
+.markdown-body h1 { @apply text-xl font-bold mt-4 mb-2; }
+.markdown-body h2 { @apply text-lg font-bold mt-3 mb-2; }
+.markdown-body h3 { @apply text-base font-semibold mt-2 mb-1; }
+.markdown-body p { @apply mb-2; }
+.markdown-body ul { @apply list-disc pl-4 mb-2; }
+.markdown-body ol { @apply list-decimal pl-4 mb-2; }
+.markdown-body li { @apply mb-1; }
+.markdown-body code { @apply bg-white/10 px-1.5 py-0.5 rounded text-emerald-400 text-xs; }
+.markdown-body pre { @apply bg-black/50 p-3 rounded-lg mb-2 overflow-x-auto; }
+.markdown-body pre code { @apply bg-transparent p-0; }
+.markdown-body a { @apply text-blue-400 hover:underline; }
+.markdown-body blockquote { @apply border-l-2 border-blue-500 pl-3 italic text-zinc-400; }
+.markdown-body table { @apply w-full border-collapse mb-2; }
+.markdown-body th { @apply bg-white/5 px-3 py-2 text-left font-semibold border border-white/10; }
+.markdown-body td { @apply px-3 py-2 border border-white/10; }
+.markdown-body hr { @apply border-white/10 my-4; }

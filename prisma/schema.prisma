@@ -1,0 +1,99 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = "file:./keelead.db"
+}
+
+model Lead {
+  id          String   @id @default(cuid())
+  firstName   String
+  lastName    String
+  email       String?
+  phone       String?
+  company     String?
+  title       String?
+  website     String?
+  linkedin    String?
+  location    String?
+  source      String?
+  status      String   @default("new") // new, contacted, qualified, converted, lost
+  score       Int      @default(0)
+  verified    Boolean  @default(false)
+  tags        String?  // JSON array of tags
+  notes       String?
+  metadata    String?  // JSON object for extra data
+  campaignId  String?
+  campaign    Campaign? @relation(fields: [campaignId], references: [id])
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@index([email])
+  @@index([company])
+  @@index([status])
+  @@index([campaignId])
+}
+
+model Campaign {
+  id          String   @id @default(cuid())
+  name        String
+  description String?
+  status      String   @default("draft") // draft, active, paused, completed
+  type        String   @default("email") // email, linkedin, phone, multi
+  targetLeads Int      @default(0)
+  sentCount   Int      @default(0)
+  openRate    Float    @default(0)
+  replyRate   Float    @default(0)
+  metadata    String?  // JSON object
+  leads       Lead[]
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model Conversation {
+  id        String    @id @default(cuid())
+  title     String?
+  messages  Message[]
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+}
+
+model Message {
+  id             String       @id @default(cuid())
+  role           String       // user, assistant, system
+  content        String
+  conversationId String
+  conversation   Conversation @relation(fields: [conversationId], references: [id], onDelete: Cascade)
+  metadata       String?      // JSON for lead results, etc.
+  createdAt      DateTime     @default(now())
+
+  @@index([conversationId])
+}
+
+model VerificationLog {
+  id        String   @id @default(cuid())
+  email     String
+  result    String   // JSON with verification details
+  score     Int
+  status    String   // valid, invalid, catch-all, disposable, unknown
+  createdAt DateTime @default(now())
+
+  @@index([email])
+}
+
+model ExportLog {
+  id        String   @id @default(cuid())
+  format    String   // csv, json, xlsx, vcard, pdf
+  count     Int
+  filters   String?  // JSON filters applied
+  filePath  String?
+  createdAt DateTime @default(now())
+}
+
+model Setting {
+  id    String @id @default(cuid())
+  key   String @unique
+  value String // JSON value
+}

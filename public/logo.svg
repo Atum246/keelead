@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="200" height="200">
+  <defs>
+    <linearGradient id="grad1" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#3b82f6;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#10b981;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="grad2" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#3b82f6;stop-opacity:0.3" />
+      <stop offset="100%" style="stop-color:#10b981;stop-opacity:0.3" />
+    </linearGradient>
+    <linearGradient id="grad3" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#3b82f6;stop-opacity:0.15" />
+      <stop offset="100%" style="stop-color:#10b981;stop-opacity:0.15" />
+    </linearGradient>
+  </defs>
+  <!-- Radar/sonar waves -->
+  <circle cx="100" cy="100" r="90" fill="none" stroke="url(#grad3)" stroke-width="2"/>
+  <circle cx="100" cy="100" r="70" fill="none" stroke="url(#grad2)" stroke-width="2"/>
+  <circle cx="100" cy="100" r="50" fill="none" stroke="url(#grad1)" stroke-width="2.5" opacity="0.6"/>
+  <!-- Stylized K -->
+  <path d="M 65 45 L 65 155 L 80 155 L 80 105 L 120 155 L 140 155 L 95 100 L 135 45 L 115 45 L 80 95 L 80 45 Z" fill="url(#radial)" />
+  <path d="M 65 45 L 65 155 L 80 155 L 80 105 L 120 155 L 140 155 L 95 100 L 135 45 L 115 45 L 80 95 L 80 45 Z" fill="url(#grad1)" />
+  <!-- Accent dot -->
+  <circle cx="145" cy="55" r="8" fill="#10b981"/>
+  <circle cx="145" cy="55" r="4" fill="#000"/>
+</svg>

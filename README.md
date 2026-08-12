@@ -1,3 +1,5 @@
+
+
 <p align="center">
   <img src="public/logo.svg" width="120" alt="KeeLead Logo">
 </p>
@@ -476,6 +478,9 @@ AI agents can use these tools:
 - `keelead_research_company` — Deep company research
 - `keelead_find_contact` — Find contact information
 - `keelead_enrich_lead` — Enrich lead data
+- `keelead_get_signals` — Get intent signals (job changes, hiring, funding, news)
+- `keelead_score_lead` — AI lead scoring (0-100) based on ICP fit
+- `keelead_export_leads` — Export leads to CSV, JSON, Excel, vCard, or PDF
 
 ---
 

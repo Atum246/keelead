@@ -1,15 +1,13 @@
-version: '3.8'
-
 services:
   keelead:
     build: .
     ports:
       - "3000:3000"
     volumes:
-      - keelead-data:/app/prisma
+      - keelead-data:/app/data
     environment:
       - NODE_ENV=production
-      - DATABASE_URL=file:./prisma/keelead.db
+      - DATABASE_URL=file:/app/data/keelead.db
     restart: unless-stopped
 
 volumes:

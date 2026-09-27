@@ -47,9 +47,9 @@ export class BrowserAutomation {
         } else if (elements.length === 1) {
           result[key] = (await elements[0].textContent()) || ''
         } else {
-          result[key] = await Promise.all(
-            elements.map((el) => el.textContent() || '')
-          )
+          result[key] = (
+            await Promise.all(elements.map((el) => el.textContent()))
+          ).map((text) => text || '')
         }
       } catch {
         result[key] = ''

@@ -18,7 +18,8 @@ RUN npm run build
 # Production image, copy all the files and run next
 FROM base AS runner
 WORKDIR /app
-ENV NODE_ENV production
+ENV NODE_ENV=production
+RUN apk add --no-cache openssl
 RUN addgroup --system --gid 1001 nodejs
 RUN adduser --system --uid 1001 nextjs
 COPY --from=builder /app/public ./public
@@ -26,14 +27,17 @@ COPY --from=builder /app/prisma ./prisma
 COPY --from=builder /app/.next/standalone ./
 COPY --from=builder /app/.next/static ./.next/static
 COPY --from=builder /app/node_modules/.prisma ./node_modules/.prisma
+COPY --from=builder /app/node_modules/@prisma ./node_modules/@prisma
+COPY --from=builder /app/node_modules/prisma ./node_modules/prisma
+COPY --from=builder /app/package.json ./package.json
 
 # Create SQLite database directory
-RUN mkdir -p prisma && chown -R nextjs:nodejs prisma
+RUN mkdir -p prisma && chown -R nextjs:nodejs /app
 
 USER nextjs
 EXPOSE 3000
-ENV PORT 3000
-ENV HOSTNAME "0.0.0.0"
+ENV PORT=3000
+ENV HOSTNAME=0.0.0.0
 
 # Push database schema and start
-CMD npx prisma db push --accept-loss-data && node server.js
+CMD npx prisma db push --accept-data-loss && node server.js
